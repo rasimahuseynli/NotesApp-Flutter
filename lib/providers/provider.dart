@@ -26,15 +26,6 @@ class InputTextProvider with ChangeNotifier {
   String inputText = '';
   String titleText = '';
 
-  // void addMapItems(String titleitem, String listitem, Color colors) {
-  //   mapList['titleItems'] = titleitem;
-  //   mapList['listItems'] = listitem;
-  //   mapList['colors'] = colors.toString();
-  //   notifyListeners();
-  // }
-
-  // void addListMap() {}
-
   void newInputText(String newText) {
     inputText = newText;
     notifyListeners();
