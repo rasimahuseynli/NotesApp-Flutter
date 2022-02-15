@@ -6,7 +6,7 @@ class NoteItem extends StatefulWidget {
   final List<String> titleItems;
   final Color randomColor;
   final int index;
-  final Function()? onTap;
+  final VoidCallback onTap;
   const NoteItem(
       {Key? key,
       required this.index,

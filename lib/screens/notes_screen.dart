@@ -219,8 +219,8 @@ class _NotesScreenState extends State<NotesScreen> {
           },
           child: NoteItem(
               index: index,
-              listItems: Provider.of<InputTextProvider>(context).listItems,
-              titleItems: Provider.of<InputTextProvider>(context).titleItems,
+              listItems: inputTextVM.listItems,
+              titleItems: inputTextVM.titleItems,
               randomColor: colors[index],
               onTap: () {}
               // => _changeNoteItems(context, index),

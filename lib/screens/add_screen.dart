@@ -26,6 +26,7 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   Widget _buildAddScreenBody(BuildContext context) {
+    final inputTextVM = Provider.of<InputTextProvider>(context, listen: false);
     return Container(
       margin: const EdgeInsets.only(left: 24),
       alignment: Alignment.topLeft,
@@ -38,8 +39,7 @@ class _AddScreenState extends State<AddScreen> {
             cursorColor: const Color(0xffc4c4c4),
             autofocus: true,
             onChanged: (text) {
-              Provider.of<InputTextProvider>(context, listen: false)
-                  .newTitleText(text);
+              inputTextVM.newTitleText(text);
             },
             style: GoogleFonts.nunito(
               fontSize: 48,
@@ -63,8 +63,7 @@ class _AddScreenState extends State<AddScreen> {
             cursorColor: const Color(0xffc4c4c4),
             autofocus: true,
             onChanged: (text) {
-              Provider.of<InputTextProvider>(context, listen: false)
-                  .newInputText(text);
+              inputTextVM.newInputText(text);
             },
             style: GoogleFonts.nunito(
               fontSize: 23,
@@ -87,6 +86,7 @@ class _AddScreenState extends State<AddScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
+    final inputTextVM = Provider.of<InputTextProvider>(context, listen: false);
     return AppBar(
       centerTitle: false,
       backgroundColor: const Color(0xff252525),
@@ -98,22 +98,16 @@ class _AddScreenState extends State<AddScreen> {
             icon: Icons.save,
             onTap: () {
               setState(() {
-                if (Provider.of<InputTextProvider>(context, listen: false)
-                        .inputText ==
-                    '') {
+                if (inputTextVM.inputText == '') {
                   Provider.of<InputTextProvider>(context, listen: true)
                       .clearText();
                 }
-                if (Provider.of<InputTextProvider>(context, listen: false)
-                        .titleText ==
-                    '') {
+                if (inputTextVM.titleText == '') {
                   Provider.of<InputTextProvider>(context, listen: true)
                       .clearTitleText();
                 }
-                Provider.of<InputTextProvider>(context, listen: false)
-                    .addItem();
-                Provider.of<InputTextProvider>(context, listen: false)
-                    .addTitleItem();
+                inputTextVM.addItem();
+                inputTextVM.addTitleItem();
                 Navigator.pop(context);
               });
             },
