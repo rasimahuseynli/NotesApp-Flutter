@@ -97,19 +97,17 @@ class _AddScreenState extends State<AddScreen> {
           child: IconButtons(
             icon: Icons.save,
             onTap: () {
-              setState(() {
-                if (inputTextVM.inputText == '') {
-                  Provider.of<InputTextProvider>(context, listen: true)
-                      .clearText();
-                }
-                if (inputTextVM.titleText == '') {
-                  Provider.of<InputTextProvider>(context, listen: true)
-                      .clearTitleText();
-                }
-                inputTextVM.addItem();
-                inputTextVM.addTitleItem();
-                Navigator.pop(context);
-              });
+              if (inputTextVM.inputText == '') {
+                Provider.of<InputTextProvider>(context, listen: true)
+                    .clearText();
+              }
+              if (inputTextVM.titleText == '') {
+                Provider.of<InputTextProvider>(context, listen: true)
+                    .clearTitleText();
+              }
+              inputTextVM.addItem();
+              inputTextVM.addTitleItem();
+              Navigator.pop(context);
             },
           ),
         ),
