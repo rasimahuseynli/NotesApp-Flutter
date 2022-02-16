@@ -45,23 +45,23 @@ class _NotesScreenMapState extends State<NotesScreenMap> {
       backgroundColor: const Color(0xff252525),
       toolbarHeight: kToolbarHeight,
       elevation: 0,
-      actions: [
-        IconButtons(
-          icon: Icons.search,
-          onTap: () {
-            Route route = MaterialPageRoute(builder: (context) {
-              return AddScreen(
-                addScreenInputText: inputTextVM.inputValue,
-                addScreenTitleText: inputTextVM.titleValue,
-              );
-            });
-            Navigator.push(context, route);
-          },
-        ),
-        const SizedBox(
-          width: 21,
-        ),
-      ],
+      // actions: [
+      //   // IconButtons(
+      //   //   icon: Icons.search,
+      //   //   onTap: () {
+      //   //     // Route route = MaterialPageRoute(builder: (context) {
+      //   //     //   return AddScreen(
+      //   //     //     addScreenInputText: inputTextVM.inputValue,
+      //   //     //     addScreenTitleText: inputTextVM.titleValue,
+      //   //     //   );
+      //   //     // });
+      //   //     // Navigator.push(context, route);
+      //   //   },
+      //   // ),
+      //   // const SizedBox(
+      //   //   width: 21,
+      //   // ),
+      // ],
     );
   }
 
