@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/providers/provider.dart';
 import 'package:notes_app/screens/add_screen.dart';
-// import 'package:notes_app/widgets/alert_dialog_module.dart';
+import 'package:notes_app/screens/notes_screen_map.dart';
 import 'package:notes_app/widgets/icon_buttons.dart';
 import 'package:notes_app/widgets/note_item.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +16,6 @@ class NotesScreen extends StatefulWidget {
 }
 
 class _NotesScreenState extends State<NotesScreen> {
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   List<Color> listColors = [
     Colors.red,
     Colors.green,
@@ -30,65 +28,6 @@ class _NotesScreenState extends State<NotesScreen> {
   ];
   List<Color> colors = [];
   int random() => Random().nextInt(listColors.length);
-
-  // Future<String?> _changeNoteItems(BuildContext context, int index) {
-  //   return showDialog<String>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialogWidget(
-  //         formKey: _formKey,
-  //         isAdded: false,
-  //         hintLabel: Provider.of<InputTextProvider>(context, listen: false)
-  //             .listItems[index],
-  //         // onPressLeft: () {
-  //         //   setState(() {
-  //         //     listItems.remove(listItems[index]);
-  //         //     Navigator.pop(context);
-  //         //   });
-  //         // },
-  //         onPressSave: () {
-  //           String inputText =
-  //               Provider.of<InputTextProvider>(context).inputText;
-  //           setState(
-  //             () {
-  //               if (_formKey.currentState!.validate()) {
-  //                 Provider.of<InputTextProvider>(context, listen: false)
-  //                     .listItems[index] = inputText;
-  //                 Navigator.pop(context);
-  //               }
-  //             },
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Future<String?> _addToDo(BuildContext context) {
-  //   return showDialog<String>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialogWidget(
-  //         formKey: _formKey,
-  //         // isAdded: true,
-  //         hintLabel: 'metn əlavə et',
-  //         onPressSave: () {
-  //           String inputText =
-  //               Provider.of<InputTextProvider>(context, listen: false)
-  //                   .inputText;
-  //           setState(
-  //             () {
-  //               if (_formKey.currentState!.validate()) {
-  //                 listItems.add(inputText);
-  //                 Navigator.pop(context);
-  //               }
-  //             },
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
 
   Future<String?> _infoButton(BuildContext context) {
     return showDialog<String>(
@@ -163,7 +102,12 @@ class _NotesScreenState extends State<NotesScreen> {
       actions: [
         IconButtons(
           icon: Icons.search,
-          onTap: () {},
+          onTap: () {
+            Route route = MaterialPageRoute(builder: (context) {
+              return const NotesScreenMap();
+            });
+            Navigator.push(context, route);
+          },
         ),
         const SizedBox(
           width: 21,
@@ -174,12 +118,6 @@ class _NotesScreenState extends State<NotesScreen> {
         ),
       ],
     );
-  }
-
-  Widget _buildBody() {
-    return Provider.of<InputTextProvider>(context).listItems.isEmpty
-        ? _buildNoNote()
-        : _buildNoteList();
   }
 
   Widget _buildNoNote() {
@@ -203,38 +141,43 @@ class _NotesScreenState extends State<NotesScreen> {
     );
   }
 
-  Widget _buildNoteList() {
+  Widget _buildBody() {
     colors.add(listColors[random()]);
     final inputTextVM = Provider.of<InputTextProvider>(context);
+
+    if (inputTextVM.titleItems.isEmpty) return _buildNoNote();
+
     return ListView.builder(
       padding: const EdgeInsets.all(10.0),
       itemCount: inputTextVM.titleItems.length,
       itemBuilder: (context, index) {
         return Dismissible(
-          key: ValueKey(index),
+          key: UniqueKey(),
           onDismissed: (direction) {
             if (direction == DismissDirection.endToStart) {
-              inputTextVM.titleItems.removeAt(index);
+              inputTextVM.deleteItem(index);
             }
           },
           child: NoteItem(
-              index: index,
-              listItems: inputTextVM.listItems,
-              titleItems: inputTextVM.titleItems,
-              randomColor: colors[index],
-              onTap: () {}
-              // => _changeNoteItems(context, index),
-              ),
+            index: index,
+            listItems: inputTextVM.listItems,
+            titleItems: inputTextVM.titleItems,
+            randomColor: colors[index],
+          ),
         );
       },
     );
   }
 
   Widget _buildFAB(BuildContext context) {
+    final inputTextVM = Provider.of<InputTextProvider>(context, listen: false);
     return FloatingActionButton(
       onPressed: () {
         Route route = MaterialPageRoute(builder: (context) {
-          return const AddScreen();
+          return AddScreen(
+            addScreenInputText: inputTextVM.inputValue,
+            addScreenTitleText: inputTextVM.titleValue,
+          );
         });
         Navigator.push(context, route);
       },
