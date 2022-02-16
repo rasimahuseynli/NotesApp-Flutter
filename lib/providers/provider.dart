@@ -26,7 +26,7 @@ class InputTextProvider with ChangeNotifier {
 
     _titleMap.addAll(body);
 
-    // print(_titleMap.keys);
+    print(_titleMap.keys);
 
     notifyListeners();
   }

@@ -57,7 +57,7 @@ class _AddScreenState extends State<AddScreen> {
             TextField(
               controller: _titleController,
               keyboardType: TextInputType.multiline,
-              maxLength: 35,
+              maxLength: 30,
               maxLines: 2,
               cursorHeight: 60,
               cursorColor: const Color(0xffc4c4c4),
