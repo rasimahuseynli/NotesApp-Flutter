@@ -71,8 +71,10 @@ class _NotesScreenMapState extends State<NotesScreenMap> {
 
     return ListView.builder(
       padding: const EdgeInsets.all(10.0),
-      itemCount: inputTextVM.titleItems.length,
+      itemCount: inputTextVM.titleMap.keys.length,
       itemBuilder: (context, index) {
+        final title = inputTextVM.titleMap.values.elementAt(index);
+
         return Dismissible(
           key: UniqueKey(),
           onDismissed: (direction) {
