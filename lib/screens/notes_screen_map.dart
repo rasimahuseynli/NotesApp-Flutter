@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/providers/provider.dart';
-import 'package:notes_app/screens/add_screen.dart';
-import 'package:notes_app/widgets/icon_buttons.dart';
+// import 'package:notes_app/screens/add_screen.dart';
+// import 'package:notes_app/widgets/icon_buttons.dart';
 import 'package:notes_app/widgets/note_item.dart';
 import 'package:provider/provider.dart';
 // import 'package:google_fonts/google_fonts.dart';
@@ -38,7 +38,7 @@ class _NotesScreenMapState extends State<NotesScreenMap> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    final inputTextVM = Provider.of<InputTextProvider>(context, listen: false);
+    // final inputTextVM = Provider.of<InputTextProvider>(context, listen: false);
 
     return AppBar(
       centerTitle: false,
