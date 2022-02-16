@@ -4,7 +4,7 @@ import 'package:notes_app/screens/add_screen.dart';
 import 'package:notes_app/widgets/icon_buttons.dart';
 import 'package:notes_app/widgets/note_item.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 
 class NotesScreenMap extends StatefulWidget {
@@ -73,7 +73,7 @@ class _NotesScreenMapState extends State<NotesScreenMap> {
       padding: const EdgeInsets.all(10.0),
       itemCount: inputTextVM.titleMap.keys.length,
       itemBuilder: (context, index) {
-        final title = inputTextVM.titleMap.values.elementAt(index);
+        // final title = inputTextVM.titleMap.values.elementAt(index);
 
         return Dismissible(
           key: UniqueKey(),
