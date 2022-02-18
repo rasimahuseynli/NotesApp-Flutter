@@ -30,7 +30,7 @@ class NoteItem extends StatelessWidget {
             inputTextVM.updateValues(
               index,
               titleItems.elementAt(index),
-              listItems[index],
+              listItems.elementAt(index),
               true,
             );
 

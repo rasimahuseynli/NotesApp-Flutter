@@ -5,6 +5,7 @@ class InputTextProvider with ChangeNotifier {
   List<String> titleItems = [];
 
   final Map<int, String> _titleMap = <int, String>{};
+  final Map<int, String> _inputMap = <int, String>{};
 
   String _titleValue = '';
   String _inputValue = '';
@@ -26,12 +27,25 @@ class InputTextProvider with ChangeNotifier {
 
     _titleMap.addAll(body);
 
-    print(_titleMap.keys);
-
     notifyListeners();
   }
 
   Map<int, String> get titleMap => _titleMap;
+
+  void addInputMap(String value) {
+    final inputMapLenght = _inputMap.keys.length;
+    final inputIndex = inputMapLenght + 1;
+
+    final body = {
+      inputIndex: value,
+    };
+
+    _inputMap.addAll(body);
+
+    notifyListeners();
+  }
+
+  Map<int, String> get inputMap => _inputMap;
 
   set inputValue(String value) {
     _inputValue = value;
